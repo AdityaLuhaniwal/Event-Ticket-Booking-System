@@ -22,4 +22,4 @@ node_modules/
 Thumbs.db
 
 # Backend secrets
-Backend/event-booking/src/main/resources/application.properties
+Backend/src/main/resources/application.properties
