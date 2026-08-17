@@ -18,7 +18,7 @@ function Booking() {
   const loadEvent = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:8080/api/events/${id}`
+        `http://https://event-ticket-booking-system-e7wn.onrender.com/api/events/${id}`
       );
 
       setEvent(response.data);

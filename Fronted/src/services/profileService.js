@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API = "http://localhost:8080/api/bookings";
+const API = "http://https://event-ticket-booking-system-e7wn.onrender.com/api/bookings";
 
 export const getAllBookings = async () => {
 

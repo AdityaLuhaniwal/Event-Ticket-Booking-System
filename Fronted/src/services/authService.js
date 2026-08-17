@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API = "http://localhost:8080/api/auth";
+const API = "http://https://event-ticket-booking-system-e7wn.onrender.com/api/auth";
 
 export const loginUser = async (loginData) => {
     const response = await axios.post(`${API}/login`, loginData);

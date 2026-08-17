@@ -17,7 +17,7 @@ function Events() {
         try {
 
             const response = await axios.get(
-                "http://localhost:8080/api/events"
+                "http://https://event-ticket-booking-system-e7wn.onrender.com/api/events"
             );
 
             setEvents(response.data);
