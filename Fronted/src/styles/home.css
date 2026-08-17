@@ -1,0 +1,46 @@
+/* ========================= */
+/* HOME PAGE */
+/* ========================= */
+
+.home-page {
+    min-height: 100vh;
+    background: #0f172a;
+}
+
+/* Main Hero Heading */
+
+.hero-title {
+    color: #ffc107 !important;
+    font-size: 64px;
+    font-weight: 700;
+    text-align: center;
+}
+
+/* Subtitle */
+
+.hero-subtitle {
+    color: #94a3b8 !important;
+    font-size: 24px;
+    text-align: center;
+}
+
+/* Explore Button */
+
+.explore-btn {
+    background: #ffc107 !important;
+    color: #111827 !important;
+    border: none;
+    border-radius: 12px;
+    padding: 15px 35px;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+/* Featured Events Heading */
+
+.featured-title {
+    color: #ffc107 !important;
+    font-size: 36px;
+    font-weight: 700;
+    text-align: center;
+}

@@ -1,0 +1,25 @@
+# Frontend
+Frontend/node_modules/
+Frontend/dist/
+
+# Backend
+Backend/target/
+
+# Root Node modules
+node_modules/
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# IDE
+.idea/
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Backend secrets
+Backend/event-booking/src/main/resources/application.properties

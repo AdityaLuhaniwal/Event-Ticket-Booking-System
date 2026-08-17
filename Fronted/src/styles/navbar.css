@@ -1,0 +1,27 @@
+/* Register button */
+
+.navbar-register {
+    background-color: #ffc107 !important;
+    color: #000 !important;
+
+    font-weight: 600 !important;
+
+    padding: 8px 20px !important;
+
+    border-radius: 50px !important;
+
+    border: none !important;
+
+    box-shadow: none !important;
+
+    transition: 0.2s ease;
+}
+
+.navbar-register:hover {
+    background-color: #ffca2c !important;
+    color: #000 !important;
+
+    transform: none !important;
+
+    box-shadow: none !important;
+}
