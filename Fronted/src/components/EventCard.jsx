@@ -1,25 +1,14 @@
 import { useNavigate } from "react-router-dom";
 
 function EventCard({ id, title, date, location, price, image }) {
-
   const navigate = useNavigate();
 
-  const eventImages = {
-    "IPL Final 2026": "/images/ipl.jpeg",
-    "Arijit Singh Live": "/images/arijit.jpeg",
-    "Movie Premiere Night": "/images/movie.jpeg",
-    "Zakir Khan Live": "/images/zakir.jpeg",
-    "A.R. Rahman Live": "/images/arrahman.jpeg",
-    "Diljit Dosanjh Live": "/images/diljit.jpeg",
-    "Anubhav Singh Bassi Live": "/images/bassi.jpeg",
-    "India International Trade Fair": "/images/tradefair.jpeg"
-  };
-
-  const eventImage = eventImages[title] || image;
+  const eventImage = image
+    ? image.replace(".jpg", ".jpeg")
+    : "/images/default.jpeg";
 
   return (
     <div className="col-md-4 mb-4">
-
       <div className="card h-100 shadow-sm">
 
         <img
@@ -30,10 +19,12 @@ function EventCard({ id, title, date, location, price, image }) {
             height: "220px",
             objectFit: "cover"
           }}
+          onError={(e) => {
+            console.log("Image not found:", eventImage);
+          }}
         />
 
         <div className="card-body">
-
           <h4>{title}</h4>
 
           <p className="text-muted">
@@ -54,11 +45,9 @@ function EventCard({ id, title, date, location, price, image }) {
           >
             Book Now
           </button>
-
         </div>
 
       </div>
-
     </div>
   );
 }

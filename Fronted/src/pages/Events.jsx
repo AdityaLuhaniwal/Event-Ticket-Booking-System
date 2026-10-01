@@ -13,25 +13,22 @@ function Events() {
     }, []);
 
     const loadEvents = async () => {
-
         try {
 
             const response = await axios.get(
-                "http://https://event-ticket-booking-system-e7wn.onrender.com/api/events"
+                "https://event-ticket-booking-system-e7wn.onrender.com/api/events"
             );
 
             setEvents(response.data);
 
         } catch (error) {
 
-            console.log(error);
+            console.log("Error loading events:", error);
 
         }
-
     };
 
     return (
-
         <>
             <Navbar />
 
@@ -44,7 +41,6 @@ function Events() {
                 <div className="row">
 
                     {events.map((event) => (
-
                         <EventCard
                             key={event.id}
                             id={event.id}
@@ -54,15 +50,12 @@ function Events() {
                             price={event.ticketPrice}
                             image={event.imageUrl}
                         />
-
                     ))}
 
                 </div>
 
             </div>
-
         </>
-
     );
 }
 
