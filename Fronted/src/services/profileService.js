@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const API = "http://https://event-ticket-booking-system-e7wn.onrender.com/api/bookings";
+const API =
+    "https://event-ticket-booking-system-e7wn.onrender.com/api/bookings";
 
 export const getAllBookings = async () => {
 
@@ -15,6 +16,10 @@ export const getAllBookings = async () => {
 };
 
 export const cancelBooking = async (id) => {
-    const response = await axios.delete(`${API}/${id}`);
+
+    const response = await axios.delete(
+        `${API}/${id}`
+    );
+
     return response.data;
 };

@@ -1,14 +1,23 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
-import Hero from "../components/Hero";
 import EventCard from "../components/EventCard";
-import { getAllEvents } from "../services/eventService";
-
-import "../styles/home.css";
+import axios from "axios";
 
 function Home() {
+    const [events, setEvents] = useState(() => {
+        const savedEvents = localStorage.getItem("events");
 
-    const [events, setEvents] = useState([]);
+        return savedEvents ? JSON.parse(savedEvents) : [];
+    });
+
+    const [loading, setLoading] = useState(() => {
+        const savedEvents = localStorage.getItem("events");
+
+        return !savedEvents;
+    });
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         loadEvents();
@@ -16,47 +25,110 @@ function Home() {
 
     const loadEvents = async () => {
         try {
-            const data = await getAllEvents();
-            setEvents(data);
+            const response = await axios.get(
+                "https://event-ticket-booking-system-e7wn.onrender.com/api/events"
+            );
+
+            setEvents(response.data);
+
+            // Save latest events in browser cache
+            localStorage.setItem(
+                "events",
+                JSON.stringify(response.data)
+            );
+
         } catch (error) {
-            console.error(error);
+            console.log("Error loading events:", error);
+        } finally {
+            setLoading(false);
         }
     };
 
     return (
-        <div className="home-page">
-
+        <>
             <Navbar />
 
-            <Hero />
+            {/* Hero Section */}
+            <div
+                className="text-center mt-5"
+                style={{ paddingTop: "20px" }}
+            >
+                <h1
+                    style={{
+                        color: "#ffc107",
+                        fontSize: "72px",
+                        fontWeight: "700"
+                    }}
+                >
+                    Book Your Favourite Events 🎉
+                </h1>
 
-            <div className="container my-5">
+                <p
+                    style={{
+                        color: "#9db0d0",
+                        fontSize: "28px"
+                    }}
+                >
+                    Concerts • Sports • Movies • Festivals • Stand-up Comedy
+                </p>
 
-                <h2 className="text-center mb-5 featured-title">
+                <button
+                    className="btn btn-warning btn-lg mt-4 px-5"
+                    onClick={() => navigate("/events")}
+                >
+                    Explore Events
+                </button>
+            </div>
+
+            {/* Featured Events */}
+            <div className="container mt-5 pt-4 pb-5">
+
+                <h2
+                    className="text-center mb-5"
+                    style={{
+                        color: "#ffc107",
+                        fontWeight: "700"
+                    }}
+                >
                     ⭐ Featured Events
                 </h2>
 
                 <div className="row">
 
-                    {events.map((event) => (
+                    {loading ? (
+                        <div className="text-center w-100 mt-4">
 
-                        <EventCard
-                            key={event.id}
-                            id={event.id}
-                            title={event.eventName}
-                            date={event.eventDate}
-                            location={event.venue}
-                            price={event.ticketPrice}
-                            image={event.imageUrl}
-                        />
+                            <div
+                                className="spinner-border text-warning"
+                                role="status"
+                                style={{
+                                    width: "3rem",
+                                    height: "3rem"
+                                }}
+                            ></div>
 
-                    ))}
+                            <p className="text-white mt-3">
+                                Loading Events...
+                            </p>
+
+                        </div>
+                    ) : (
+                        events.map((event) => (
+                            <EventCard
+                                key={event.id}
+                                id={event.id}
+                                title={event.eventName}
+                                date={event.eventDate}
+                                location={event.venue}
+                                price={event.ticketPrice}
+                                image={event.imageUrl}
+                            />
+                        ))
+                    )}
 
                 </div>
-
             </div>
-
-        </div>
+        </>
     );
 }
 

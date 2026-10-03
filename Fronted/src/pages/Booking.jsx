@@ -13,18 +13,18 @@ function Booking() {
 
   useEffect(() => {
     loadEvent();
-  }, []);
+  }, [id]);
 
   const loadEvent = async () => {
     try {
       const response = await axios.get(
-        `http://https://event-ticket-booking-system-e7wn.onrender.com/api/events/${id}`
+        `https://event-ticket-booking-system-e7wn.onrender.com/api/events/${id}`
       );
 
       setEvent(response.data);
 
     } catch (error) {
-      console.log(error);
+      console.log("Error loading event:", error);
     }
   };
 
@@ -79,7 +79,6 @@ function Booking() {
         }}
       >
 
-        {/* Heading */}
         <h2
           className="text-center"
           style={{
@@ -93,7 +92,6 @@ function Booking() {
 
         <hr />
 
-        {/* Event Name */}
         <h4
           style={{
             color: "#ffc107",
@@ -103,7 +101,6 @@ function Booking() {
           {event.eventName}
         </h4>
 
-        {/* Event Details */}
         <p>
           <strong>📍 Venue:</strong> {event.venue}
         </p>
@@ -119,7 +116,6 @@ function Booking() {
           </span>
         </p>
 
-        {/* Tickets */}
         <div className="mb-3">
 
           <label
@@ -146,7 +142,6 @@ function Booking() {
 
         </div>
 
-        {/* Total */}
         <h4
           style={{
             color: "#ffc107",
@@ -157,7 +152,6 @@ function Booking() {
           Total : ₹{tickets * event.ticketPrice}
         </h4>
 
-        {/* Button */}
         <button
           onClick={handleBooking}
           style={{

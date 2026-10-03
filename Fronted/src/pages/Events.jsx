@@ -7,6 +7,7 @@ import "../styles/event.css";
 function Events() {
 
     const [events, setEvents] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         loadEvents();
@@ -25,6 +26,10 @@ function Events() {
 
             console.log("Error loading events:", error);
 
+        } finally {
+
+            setLoading(false);
+
         }
     };
 
@@ -40,17 +45,53 @@ function Events() {
 
                 <div className="row">
 
-                    {events.map((event) => (
-                        <EventCard
-                            key={event.id}
-                            id={event.id}
-                            title={event.eventName}
-                            date={event.eventDate}
-                            location={event.venue}
-                            price={event.ticketPrice}
-                            image={event.imageUrl}
-                        />
-                    ))}
+                    {loading ? (
+
+                        <div className="text-center w-100 mt-5">
+
+                            <div
+                                className="spinner-border text-warning"
+                                role="status"
+                                style={{
+                                    width: "3rem",
+                                    height: "3rem"
+                                }}
+                            >
+                            </div>
+
+                            <p className="text-white mt-3">
+                                Loading Events...
+                            </p>
+
+                        </div>
+
+                    ) : events.length === 0 ? (
+
+                        <div className="text-center w-100 mt-5">
+
+                            <p className="text-white">
+                                No Events Available
+                            </p>
+
+                        </div>
+
+                    ) : (
+
+                        events.map((event) => (
+
+                            <EventCard
+                                key={event.id}
+                                id={event.id}
+                                title={event.eventName}
+                                date={event.eventDate}
+                                location={event.venue}
+                                price={event.ticketPrice}
+                                image={event.imageUrl}
+                            />
+
+                        ))
+
+                    )}
 
                 </div>
 
